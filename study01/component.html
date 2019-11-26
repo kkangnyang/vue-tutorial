@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--vue 최신버전 링크-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <my-component></my-component>
+    </div>
+
+    <script>
+
+      const myComponent = {
+        template: ` 
+          <div>
+            count: {{ count }}
+            <button type="button" @click="increaseCount">증가</button>
+          </div>
+        `,
+        data () {
+          return {
+            count: 0
+          }
+        },
+        methods: {
+          increaseCount (event) {
+            this.count++
+          }
+        }
+      }
+
+      const app = new Vue({
+        el: '#app',
+        components: {
+          myComponent: myComponent
+        },
+        data: {
+        },
+        methods: {
+          
+        }
+      })
+    </script>
+  </body>
+</html>

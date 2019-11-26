@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--vue 최신버전 링크-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="message">
+      <br/>
+      {{ getReversedMessage() }}
+      <br/>
+      {{ reversedMessage }}
+      <br/>
+      {{ message2 }}
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: '',
+          message2: ''
+        },
+        methods: {
+          getReversedMessage () {
+            console.log('getReversedMessage')
+            return this.message.split('').reverse().join('')
+          }
+        },
+        computed: {
+          reversedMessage() {
+            console.log('computed reversedMessage')
+            return this.message.split('').reverse().join('')
+          }
+        },
+        watch: {
+          message () {
+            console.log('watch message')
+            this.message2 = this.message.split('').reverse().join('')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

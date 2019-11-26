@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--vue 최신버전 링크-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!--MVVM 패턴 : Model Veiw Vue Model-->
+    <div id="app">
+      <div v-if="isShow">
+          <span v-text="name"></span>님 <span v-html="message"></span>
+      </div>
+      <div v-else>
+          else다.
+      </div>
+      <!--for와 if를 같은 레벨에 놓지마랑.-->
+      <div v-if="isShow" v-for="(value, i) in list">
+          {{ i }} {{ value }}<br/>
+      </div>
+
+      <div v-if="isShow">
+        <div v-for="(obj, i) in objList">
+           {{ obj.value }} , {{i}}
+        </div>
+      </div>
+
+      <div>
+        {{ count }}
+        <button type="button" v-on:click="increase">증가</button>
+      </div>
+
+      <span v-pre>{{ name }}</span>
+
+      <div v-cloak>
+          {{ name }}
+      </div>
+
+      <div>
+        <span>{{ text }}</span><br/>
+        <input type="text" v-model="text" />
+      </div>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          name: 'gayoung',
+          message: '<b>환영합니다.</b>',
+          isShow: true,
+          list: ['a', 'b', 'c', 'd', 'e'],
+          objList: [{ value : 'a' }],
+          count: 0,
+          text: ''
+        },
+        methods: {
+          increase (e) {
+            this.count++
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

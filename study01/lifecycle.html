@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--vue 최신버전 링크-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      {{ name }}
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          name: 'gayoung'
+        },
+        beforeCreate () {
+          console.log('beforeCreate')
+        },
+        created () {
+          console.log('created')
+        },
+        beforeMount () {
+          console.log('beforeMount')
+        },
+        mounted () {
+          console.log('mounted')
+        },
+        beforeUpdate () {
+          console.log('beforeUpdate')
+        },
+        updated () {
+          console.log('updated')
+        },
+        methods: {
+          hello () {
+            console.log('hello')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
