@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h3>TO-DO LIST</h3>
+            <insert-component @insert-data="insertData"></insert-component>
+            <list-component :todo-list="todoList" @update-data="updateData"></list-component>
+        </div>
+    </body>
+
+    <script>
+
+        const insertComponent = {
+            template: `
+                <div>
+                    <input type="text" v-model="todoText" />
+                    <button type="button" @click="clickButton">저장</button>
+                </div>
+            `,
+            data () {
+                return {
+                    todoText: ''
+                }
+            },
+            methods: {
+                clickButton () {
+                    this.$emit('insert-data', this.todoText);
+                }
+            }
+        }
+
+        const listComponent = {
+            template: `
+                <div>
+                    <div v-for="todo in todoList" :key="todo.id" v-if="todo.status === true">
+                        <div>{{ todo.label }}</div>
+                        <button type="button" @click="clickButton(todo)">X</button>
+                    </div>
+                </div>
+            `,
+            data () {
+                return {
+
+                }
+            },
+            props: {
+                todoList: {
+                    type: Array
+                }
+            },
+            methods: {
+                clickButton (todo) {
+                    this.$emit('update-data', todo)
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: '#app',
+            components: {
+                insertComponent: insertComponent,
+                listComponent: listComponent
+            },
+            data: {
+                todoList: [],
+                todoId: 0
+            },
+            methods: {
+                insertData (text) {
+                    this.todoList.push({
+                        id: this.todoId++,
+                        label: text,
+                        status: true
+                    })
+                },
+                updateData (todo) {
+                    todo.status = todo.status === true ? false : true;
+                }
+            }
+        })
+    </script>
+</html>
